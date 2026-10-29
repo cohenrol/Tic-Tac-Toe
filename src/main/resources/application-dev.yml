@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.client.RestClient: DEBUG
+    org.springframework.cloud.context.refresh: DEBUG
+    org.springframework.cloud.config.client: DEBUG
+    org.springframework.cloud.config.server: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.apache.hc.client5.http: DEBUG

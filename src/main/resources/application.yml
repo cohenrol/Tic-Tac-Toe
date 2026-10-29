@@ -1,34 +1,19 @@
 spring:
   application:
     name: xo-service
-
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   datasource:
     url: ${POSTGRES_DATASOURCE_URL}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
-
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
 server:
-  port: ${SERVER_INNER_PORT}
-
-logging:
-  level:
-    org.springframework.web: DEBUG
-#    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    org.springframework.security: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.springframework: INFO
-    org.springframework.web.client.RestClient: DEBUG
-    org.apache.hc.client5.http: DEBUG
+  port: 8080
 
 app:
   jwt:
