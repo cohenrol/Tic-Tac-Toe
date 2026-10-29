@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: xo-service
+
+  datasource:
+    url: ${POSTGRES_DATASOURCE_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+server:
+  port: ${SERVER_INNER_PORT}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+#    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.springframework: INFO
+    org.springframework.web.client.RestClient: DEBUG
+    org.apache.hc.client5.http: DEBUG
+
+app:
+  jwt:
+    common:
+      issuer: ${spring.application.name}
+      key-id: "auth-server-ec-key"
+      keystore:
+        location: ${XO_SERVICE_JWT_KEYSTORE_LOCATION}
+        password: ${XO_SERVICE_JWT_KEYSTORE_PASSWORD}
+        alias: ${XO_SERVICE_JWT_KEYSTORE_ALIAS}
+    users:
+      expiration-ms: 900000
+      refresh-expiration-ms: 2592000000
+      access-key-audience: xo-service
+    services:
+      common:
+        expiration-ms: 3600000
+      wish:
+        access-key-audience: xo-service

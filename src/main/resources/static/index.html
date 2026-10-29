@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Крестики-Нолики</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div id="game-layout">
+
+    <!-- ФОРМА АВТОРИЗАЦИИ -->
+    <div id="auth-section">
+        <h3>Авторизация</h3>
+        <input type="text" id="login-input" class="auth-input"
+               placeholder="Логин (min 3 символа)" autocomplete="off">
+        <input type="password" id="password-input" class="auth-input"
+               placeholder="Пароль (min 6 символов)" autocomplete="new-password">
+        <div class="auth-buttons">
+            <button id="signup-btn" class="action-btn btn-start">Регистрация</button>
+            <button id="login-btn" class="action-btn btn-move">Войти</button>
+            <button id="logout-btn" class="action-btn btn-logout">Выйти</button>
+        </div>
+    </div>
+
+    <!-- МОЙ ПРОФИЛЬ -->
+    <div class="user-section">
+        <h3>Мой профиль</h3>
+        <div class="user-id-line">
+            Статус: <span id="auth-status">не авторизован</span>
+        </div>
+        <div class="user-id-line">
+            UUID: <span id="my-uuid-display">—</span>
+        </div>
+        <button id="my-id-btn" class="action-btn btn-start">Обновить профиль</button>
+        <div id="my-id-display" class="my-id-display"></div>
+    </div>
+
+    <!-- ИГРОВОЙ БЛОК -->
+    <div class="game-section">
+        <div class="title-container">
+            <span class="title-x">Крестики</span>
+            <span class="title-and"> и </span>
+            <span class="title-o">Нолики</span>
+        </div>
+
+        <div class="status-container">
+            <span id="game-status" class="status-badge bg-not-started">Ожидание старта</span>
+            <div class="game-id-text">UUID сессии: <span id="game-uuid">Не создана</span></div>
+        </div>
+
+        <select id="opponent-type" class="opponent-select">
+            <option value="COMPUTER">Против Компьютера</option>
+            <option value="HUMAN">Против Человека</option>
+        </select>
+
+        <table id="game-board" class="board-disabled">
+            <tr>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+            </tr>
+            <tr>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+            </tr>
+            <tr>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+                <td class="status-EMPTY">·</td>
+            </tr>
+        </table>
+
+        <button id="action-btn" class="action-btn btn-start">Новая партия</button>
+    </div>
+
+    <!-- ДОСТУПНЫЕ ИГРЫ -->
+    <div class="games-section">
+        <h3>Доступные игры</h3>
+        <button id="load-games-btn" class="action-btn btn-start">Обновить список</button>
+        <div id="games-list" class="games-list">
+            <em>Нажмите «Обновить список», чтобы загрузить игры</em>
+        </div>
+    </div>
+
+    <!-- ИСТОРИЯ ИГР -->
+    <div class="history-section">
+        <h3>История завершённых игр</h3>
+        <button id="load-history-btn" class="action-btn btn-start">Показать историю</button>
+        <div id="history-list" class="history-list">
+            <em>Нажмите «Показать историю», чтобы загрузить завершённые игры</em>
+        </div>
+    </div>
+
+    <!-- ТАБЛИЦА ЛИДЕРОВ -->
+    <div class="leaderboard-section">
+        <h3>Таблица лидеров</h3>
+        <div class="leaderboard-controls">
+            <label>Топ:
+                <input type="number" id="leaderboard-n" value="5" min="1" max="100">
+            </label>
+            <button id="load-leaderboard-btn" class="action-btn btn-start">Показать</button>
+        </div>
+        <div id="leaderboard-list" class="leaderboard-list">
+            <em>Нажмите «Показать», чтобы загрузить таблицу лидеров</em>
+        </div>
+    </div>
+
+    <!-- ЛОГГЕР -->
+    <div class="logger-row">
+        <div class="logger-block">
+            <label>Отправляемый RequestDto:</label>
+            <pre><code id="json-request">{}</code></pre>
+        </div>
+
+        <div class="logger-block">
+            <label>Полученный ResponseDto:</label>
+            <pre><code id="json-response">{}</code></pre>
+        </div>
+
+        <div class="logger-block">
+            <label style="color: #dc3545;">Окно ошибок (ExceptionResponseDto):</label>
+            <pre style="border: 1px solid #dc3545;"><code id="json-error">Ошибок нет</code></pre>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/app.js"></script>
+
+</body>
+</html>

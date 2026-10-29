@@ -1,0 +1,43 @@
+
+services:
+  xo-service:
+    container_name: xo-service
+    build: .
+    depends_on:
+      xo-postgres-db:
+        condition: service_healthy
+
+    ports:
+      - "${XO_SERVICE_EXTERNAL_PORT}:${SERVER_INNER_PORT}"
+
+    volumes:
+      - ./.security/keystore.p12:/app/resources/keystore.p12:ro
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_DATASOURCE_URL: jdbc:postgresql://xo-postgres-db:${DB_INNER_PORT}/xo_db
+
+  ##################### DATABASE ########################################
+  xo-postgres-db:
+    container_name: xo-database
+    image: postgres:16-alpine
+
+    env_file: .env
+    environment:
+      POSTGRES_DB: xo_db
+
+    ports:
+      - "${XO_DB_EXTERNAL_PORT}:${DB_INNER_PORT}"
+
+    volumes:
+      - xo-db-data:/var/lib/postgresql
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U cohenrol -d xo_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  xo-db-data:
